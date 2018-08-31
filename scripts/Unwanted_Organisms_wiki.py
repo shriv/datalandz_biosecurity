@@ -1,12 +1,31 @@
 # Download wikipedia, python -m pip install wikipedia first!
-import wikipedia, json
+import wikipedia, json, re
 
-with open(r'C:\Users\mark.johnston\Projects\DatalandNZ 2018.08\UOR.json','r') as f:
-    uor = json.load(f)
+with open(r'../data/UOR.json','rb') as f:
+    uor = f.read().decode('utf-8', 'ignore').encode('utf-8')
+
+uor = json.loads(uor)
+
+target = [org for org in uor if org['name_con'] == 'brown-marmorated stink bug' or org['name_sci'] == 'Austropuccinia psidii']
+
+print(target)
 
 i = 0
 
-for x in uor:
+## lists of colours (black, blue, brown, pink)
+colours = ['blue','green','black','gr[ae]y','orange','white','purple','red','yellow','brown'
+,'ochre','khaki','mauve','olive','pink'
+]
+
+## Create regex match with word-boundary or dash
+boundary = r'[ -]'
+colours_bounded = '|'.join(['{0}{1}{0}'.format(boundary,c) for c in colours])
+
+
+rxs = re.compile(colours_bounded,re.MULTILINE)
+
+# Loop through the organisms
+for x in target:
     i += 1
     try:
         wiki = wikipedia.WikipediaPage(title = x['name_sci'])
@@ -21,13 +40,27 @@ for x in uor:
             print('Page not found for:'+x['name_con'])
             continue
 
-    print(wiki.summary)
+    text = wiki.summary
+    try:
+        text += wiki.section('Description')
+    except:
+        pass
+
+    for match in rxs.finditer(text):
+        col = match.groups()
+        print(col)
+
+
     if i > 6:
         break
 
 
 ## add lists of patterns (glossy, speckled, spotted, stripy, stripey)
-## lists of colours (black, blue, brown, pink)
-## Regex to find sizes (\d)
+patterns = ['glossy','speckled','spotted','stripe?y','mottled','marbled']
 
-## Get a unique list of families etc, and give a common English name, e.g. Lepidoptera = butterfly
+## Characteristics
+chars = ['feathers?','scal[ey]s?','talons?','claws?']
+
+## Regex to find sizes (\d)
+sizereg = r'(\d+(\.\d{1,2})?)\s?(-|to)?\s?(\d+(\.\d{1,2})?)?\s?(((c(enti)?)?|(m(illi)?m)?)?m(et(re|er)(s)?)?|in(ches)?|f(ee)?t|y(ar)?d(s)?)'
+
