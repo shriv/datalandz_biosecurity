@@ -2,7 +2,7 @@ library("png")
 library("jpeg")
 
 
-## Define UI for random distribution app ----
+## Define UI for Insect Classification app
 ui <- fluidPage(
 
   # App title ----
@@ -26,7 +26,7 @@ ui <- fluidPage(
       mainPanel(
 
       
-      # Output: Tabset w/ plot, summary, and table ----
+      # Output: Tabset 
       tabsetPanel(type = "tabs",
                   tabPanel("Upload Image", plotOutput("plot1")), 
                   tabPanel("Classifier Results"),
@@ -36,7 +36,7 @@ ui <- fluidPage(
 )
 
 
-# Define server logic for random distribution app ----
+
 server <- function(input, output) {
     output$plot1 <- renderPlot({
         req(input$file1)
