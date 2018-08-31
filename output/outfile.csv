@@ -1,0 +1,4 @@
+﻿filename,pic_datetime,latitude,longitude,classifier_label_1,classifier_prob_1,classifier_label_2,classifier_prob_2,classifier_label_3,classifier_prob_3,temp,humidity,user_comments
+abc123.jpg,1/09/2018,-41.28664,174.77557,Halyomorpha halys,0.9,Halyomorpha angusticeps,0.07,Halyomorpha illuminata,0.03,25,85,Brown marmorated stink bug
+abc124.jpg,2/09/2018,-41.28664,174.77557,Halyomorpha halys,0.9,Halyomorpha angusticeps,0.07,Halyomorpha illuminata,0.03,23,90,Brown marmorated stink bug
+abc125.jpg,3/09/2018,-41.28664,174.77557,Halyomorpha halys,0.9,Halyomorpha angusticeps,0.07,Halyomorpha illuminata,0.03,22,31,Brown marmorated stink bug
