@@ -1,6 +1,9 @@
-library("png")
-library("jpeg")
+library(png)
+library(jpeg)
 library(leaflet)
+library(dplyr)
+library(shiny)
+
 
 r_colors <- rgb(t(col2rgb(colors()) / 255))
 names(r_colors) <- colors()
@@ -19,10 +22,10 @@ ui <- fluidPage(
 
       
       # Input: Select a file ----
-      fileInput("file1", "Choose Image File",
+      fileInput("file1", "Choose Database",
                 multiple = TRUE,
-                accept = c("image/.jpg",
-                           "image/.png"))
+                accept = c("txt/.csv",
+                           ".csv"))
     ),
     
     
@@ -32,9 +35,9 @@ ui <- fluidPage(
       
       # Output: Tabset 
       tabsetPanel(type = "tabs",
-                  tabPanel("Upload Image", plotOutput("plot1")), 
-                  tabPanel("Classifier Results"),
-                  tabPanel("Map yo species!", leafletOutput("mymap")))
+                  tabPanel("Home", tableOutput("contents")), 
+                  tabPanel("Classified Pests"),
+                  tabPanel("Species Distribution", leafletOutput("mymap")))
       )
   )
 )
@@ -43,40 +46,34 @@ ui <- fluidPage(
 
 server <- function(input, output) {
 
-    ## Plot invasive insect image to be classified
-    output$plot1 <- renderPlot({
-        ## Read input image file 
+    ## Read "DB" file
+
+    
+
+    output$contents <- renderTable({
         req(input$file1)
-        inp <- input$file1
-        imgfile <- inp$datapath
-
-        ## Read png or jpg image
-        if (strsplit(imgfile, '[.]')[[1]][2] == "png"){
-            img <- readPNG(imgfile)
-        } else {
-            img <- readJPEG(imgfile)
-        }
-
-        ## Plot the image
-        ## Don't understand the plot limits
-        plot(1, type="n" , xlim=c(100, 200), ylim=c(300, 350))
-        rasterImage(img, 100, 300, 150, 350)
-
+        data <- read.csv(input$file1$datapath, stringsAsFactors=FALSE)
+ 
+        sub_data <- data %>% select(date,
+                                    classifier_label_1,
+                                    classifier_prob_1,
+                                    user_comments,
+                                    user_name,
+                                    phone)
+        return(head(sub_data, 3))
     })
 
     
-    ## Generate points around Wellington
-    points <- eventReactive(input$recalc, {
-        cbind(rnorm(10.0, mean=174.78, sd=0.01), rnorm(10, mean=-41.28, sd=0.01))
-    }, ignoreNULL = FALSE)
-
     ## Plot points on Leaflet map
     output$mymap <- renderLeaflet({
+        req(input$file1)
+        data = read.csv(input$file1$datapath, stringsAsFactors=FALSE)
+        points <- data %>% select(lon, lat)
         leaflet() %>%
             addProviderTiles(providers$OpenStreetMap.DE,
                              options = providerTileOptions(noWrap = TRUE)
                              ) %>%
-            addMarkers(data = points())
+            addMarkers(data = points)
   })
 
 }
