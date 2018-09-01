@@ -1,0 +1,15 @@
+date,image,lon,lat,weather,text,user_id,user_name,phone,classifier_label_1,classifier_prob_1,classifier_label_2,classifier_prob_2,classifier_label_3,classifier_prob_3,temp,humidity,user_comments
+29/07/18,,174.7794,-41.27521,,,xyz,Something Else,34543532,Halyomorpha halys,0.9,Halyomorpha angusticeps,0.07,Halyomorpha illuminata,0.03,25,85,Brown marmorated stink bug
+30/07/18,,174.7877,-41.27787,,,adc,Blah Else,98732493,Halyomorpha halys,0.7,Halyomorpha angusticeps,0.2,Halyomorpha illuminata,0.03,23,90,Brown marmorated stink bug
+31/07/18,,174.7707,-41.27047,,,ldskjfldj,Something Another,276847330,Halyomorpha halys,0.9,Halyomorpha angusticeps,0.07,Halyomorpha illuminata,0.03,22,31,
+01/08/18,,174.7679,-41.28697,,,kj,Who Dis,436439689,Halyomorpha halys,0.8,Halyomorpha picus,0.1,Halyomorpha illuminata,0.1,25,85,
+02/08/18,,174.7683,-41.26861,,,"Ppioi
+",Maybe Baby,34564334,Halyomorpha halys,0.9,Halyomorpha angusticeps,0.07,Halyomorpha illuminata,0.03,23,90,Brown marmorated stink bug
+03/08/18,,174.768,-41.28127,,,"Xyz
+",Something Else,34543532,Halyomorpha halys,0.2,Halyomorpha picus,0.2,Halyomorpha illuminata,0.2,22,31,
+04/08/18,,174.7757,-41.2644,,,"Czmxnv
+",Dear Lord,234653224,Halyomorpha halys,0.9,Halyomorpha angusticeps,0.07,Halyomorpha illuminata,0.03,25,85,
+05/08/18,,174.7698,-41.27381,,,zvcx,Person X,49869369,Halyomorpha halys,0.9,Halyomorpha angusticeps,0.07,Halyomorpha illuminata,0.03,23,90,Brown marmorated stink bug
+06/08/18,,174.7839,-41.27481,,,aewqq,Nicki Minaj,93948537,Halyomorpha halys,0.9,Halyomorpha angusticeps,0.07,Halyomorpha illuminata,0.03,22,31,Brown marmorated stink bug
+07/08/18,,174.7688,-41.2681,,,"Lghijpoy
+",Mr Minion,39432344,Halyomorpha halys,0.1,Halyomorpha picus,0.07,Halyomorpha illuminata,0.03,22,31,stink bug
